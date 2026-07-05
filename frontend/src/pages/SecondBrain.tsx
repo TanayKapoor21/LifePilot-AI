@@ -101,19 +101,19 @@ export const SecondBrain: React.FC = () => {
               <line x1="200" y1="180" x2="200" y2="60" stroke="#27272a" strokeWidth={1} strokeDasharray="3" />
 
               {/* Node 1 */}
-              <g className="cursor-pointer" onClick={() => setSelectedNode('n1')}>
+              <g className="cursor-pointer" onClick={() => setSelectedNote('n1')}>
                 <circle cx="100" cy="120" r="10" fill="#0a0a0c" stroke="#3b82f6" strokeWidth={3} />
                 <text x="100" y="145" textAnchor="middle" fill="#a1a1aa" fontSize="8" className="font-mono">FastAPI</text>
               </g>
 
               {/* Node 2 */}
-              <g className="cursor-pointer" onClick={() => setSelectedNode('n2')}>
+              <g className="cursor-pointer" onClick={() => setSelectedNote('n2')}>
                 <circle cx="200" cy="60" r="12" fill="#0a0a0c" stroke="#7c3aed" strokeWidth={3} />
                 <text x="200" y="42" textAnchor="middle" fill="#ffffff" fontSize="8" className="font-mono">Zustand</text>
               </g>
 
               {/* Node 3 */}
-              <g className="cursor-pointer" onClick={() => setSelectedNode('n3')}>
+              <g className="cursor-pointer" onClick={() => setSelectedNote('n3')}>
                 <circle cx="300" cy="120" r="10" fill="#0a0a0c" stroke="#10b981" strokeWidth={3} />
                 <text x="300" y="145" textAnchor="middle" fill="#a1a1aa" fontSize="8" className="font-mono">Database</text>
               </g>
