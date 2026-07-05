@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.pytest_cache/
+test.db
+lifepilot.db
+
+# Node
+node_modules/
+dist/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
