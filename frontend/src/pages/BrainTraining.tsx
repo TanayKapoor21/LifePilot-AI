@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLifePilotStore } from '../store/store';
 import { Brain, Play, CheckCircle2, RotateCcw, Award, Zap, Clock, ShieldAlert } from 'lucide-react';
 
@@ -87,7 +87,9 @@ export const BrainTraining: React.FC = () => {
   };
 
   const handleReactionClick = () => {
-    if (reactionState === 'waiting') {
+    if (reactionState === 'idle' || reactionState === 'result' || reactionState === 'fail') {
+      startReactionTest();
+    } else if (reactionState === 'waiting') {
       setReactionState('fail');
     } else if (reactionState === 'ready') {
       const delta = Date.now() - startTime;
