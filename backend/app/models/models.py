@@ -10,7 +10,7 @@ def generate_uuid():
 class User(Base):
     __tablename__ = "users"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     email = Column(String(255), unique=True, nullable=False, index=True)
     hashed_password = Column(String(255), nullable=False)
     first_name = Column(String(100))
@@ -39,7 +39,7 @@ class User(Base):
 class UserProfile(Base):
     __tablename__ = "user_profiles"
     
-    user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), primary key=True)
+    user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
     sleep_target_hours = Column(Numeric(4, 2), default=8.00)
     water_target_ml = Column(Integer, default=3000)
     calorie_target = Column(Integer, default=2500)
@@ -55,7 +55,7 @@ class UserProfile(Base):
 class Task(Base):
     __tablename__ = "tasks"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     title = Column(String(255), nullable=False)
     description = Column(Text)
@@ -74,7 +74,7 @@ class Task(Base):
 class FinanceTransaction(Base):
     __tablename__ = "finance_transactions"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     amount = Column(Numeric(12, 2), nullable=False)
     type = Column(String(50), nullable=False) # 'income', 'expense'
@@ -91,7 +91,7 @@ class FinanceTransaction(Base):
 class HealthLog(Base):
     __tablename__ = "health_logs"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     type = Column(String(50), nullable=False) # 'water', 'calories', 'weight', 'sleep', 'steps'
     value = Column(Numeric(10, 2), nullable=False)
@@ -104,7 +104,7 @@ class HealthLog(Base):
 class LearningItem(Base):
     __tablename__ = "learning_items"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     title = Column(String(255), nullable=False)
     type = Column(String(50), nullable=False) # 'course', 'book', 'article', 'skill'
@@ -122,7 +122,7 @@ class LearningItem(Base):
 class JobApplication(Base):
     __tablename__ = "job_applications"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     company = Column(String(255), nullable=False)
     role = Column(String(255), nullable=False)
@@ -139,7 +139,7 @@ class JobApplication(Base):
 class RelationshipContact(Base):
     __tablename__ = "relationship_contacts"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     name = Column(String(255), nullable=False)
     relation = Column(String(100)) # 'family', 'friend', 'mentor', 'partner'
@@ -156,7 +156,7 @@ class RelationshipContact(Base):
 class Journal(Base):
     __tablename__ = "journals"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     content = Column(Text, nullable=False)
     mood_score = Column(Integer, nullable=False) # 1-10
@@ -169,7 +169,7 @@ class Journal(Base):
 class Habit(Base):
     __tablename__ = "habits"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     name = Column(String(255), nullable=False)
     frequency = Column(String(50), default="daily") # 'daily', 'weekly'
@@ -185,7 +185,7 @@ class Habit(Base):
 class Goal(Base):
     __tablename__ = "goals"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     title = Column(String(255), nullable=False)
     type = Column(String(50), default="short_term") # 'short_term', 'long_term'
@@ -201,7 +201,7 @@ class Goal(Base):
 class BrainGameScore(Base):
     __tablename__ = "brain_game_scores"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     game_name = Column(String(100), nullable=False)
     accuracy = Column(Numeric(5, 2), nullable=False)
@@ -216,7 +216,7 @@ class BrainGameScore(Base):
 class Mission(Base):
     __tablename__ = "missions"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     title = Column(String(255), nullable=False)
     type = Column(String(50), default="daily") # 'daily', 'weekly', 'monthly'
@@ -232,7 +232,7 @@ class Mission(Base):
 class SystemLog(Base):
     __tablename__ = "system_logs"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     log_level = Column(String(50), default="info")
     message = Column(Text, nullable=False)
     details = Column(JSON, nullable=True)
@@ -242,7 +242,7 @@ class SystemLog(Base):
 class AIUsage(Base):
     __tablename__ = "ai_usages"
     
-    id = Column(String(36), primary key=True, default=generate_uuid)
+    id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
     feature = Column(String(100), nullable=False)
     tokens_used = Column(Integer, default=0)
