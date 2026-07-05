@@ -30,8 +30,8 @@ interface LifePilotState {
   // Authentication
   setToken: (token: string | null) => void;
   setUser: (user: any | null) => void;
-  login: (email: string, password: str) => Promise<boolean>;
-  register: (email: string, password: str, firstName: string, lastName: string) => Promise<boolean>;
+  login: (email: string, password: string) => Promise<boolean>;
+  register: (email: string, password: string, firstName: string, lastName: string) => Promise<boolean>;
   logout: () => void;
   fetchProfile: () => Promise<void>;
 
@@ -92,7 +92,7 @@ interface LifePilotState {
 // Check local storage for initial token
 const storedToken = localStorage.getItem('lifepilot_token');
 
-export const useLifePilotStore = create<LifePilotPilotState>((set, get) => ({
+export const useLifePilotStore = create<LifePilotState>((set, get) => ({
   token: storedToken,
   user: null,
   summary: null,
