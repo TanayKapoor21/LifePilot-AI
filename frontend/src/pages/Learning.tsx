@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLifePilotStore } from '../store/store';
 import { 
-  BookOpen, Plus, Award, Github, Zap, RefreshCw, CheckCircle, HelpCircle, GraduationCap
+  BookOpen, Plus, Award, Zap, RefreshCw, CheckCircle, HelpCircle, GraduationCap
 } from 'lucide-react';
 
 export const Learning: React.FC = () => {
