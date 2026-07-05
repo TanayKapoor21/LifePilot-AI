@@ -829,7 +829,7 @@ export const useLifePilotStore = create<LifePilotState>((set, get) => ({
     } catch (err) {
       // Mock Response Fallback matching Personal COO
       let reply = "I'm analyzing your request. Let's make sure we log all daily habits to unlock the daily missions and maximize XP efficiency.";
-      const lower = message.lower();
+      const lower = message.toLowerCase();
       if (lower.includes('status') || lower.includes('report')) {
         reply = "Daily briefing: Tasks sprint is currently at stable velocity. Work sleep cycle metrics are slightly low. I suggest logging a 30-min Pomodoro session to clear the current design system card.";
       } else if (lower.includes('saving') || lower.includes('money')) {
