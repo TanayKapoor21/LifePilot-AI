@@ -17,11 +17,18 @@ class SimulationRequest(BaseModel):
     spending_delta: float  # money saved/spent relative to daily average (e.g., -500.00, +200.00)
     work_delta: float  # hours relative to current (e.g., +1.0, -2.0)
 
+class TimelinePoint(BaseModel):
+    month: str
+    productivity: float
+    health: float
+    finance: float
+    life_score: float
+
 class SimulationResponse(BaseModel):
     life_scores: Dict[str, float]
     metrics: Dict[str, str]
     predictions: List[str]
-    timeline_projection: List[Dict[str, float]]
+    timeline_projection: List[TimelinePoint]
 
 @router.post("/simulate", response_model=SimulationResponse)
 def simulate_lifestyle_changes(req: SimulationRequest, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
