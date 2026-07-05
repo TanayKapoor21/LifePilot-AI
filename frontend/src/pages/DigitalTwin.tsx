@@ -190,7 +190,7 @@ export const DigitalTwin: React.FC = () => {
                   fill="#3b82f6" 
                   fillOpacity={0.25} 
                 />
-                <Legend tick={{ fill: '#a1a1aa', fontSize: 10 }} />
+                <Legend wrapperStyle={{ fontSize: '10px' }} />
               </RadarChart>
             </ResponsiveContainer>
           </div>
