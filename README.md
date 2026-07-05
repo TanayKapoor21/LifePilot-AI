@@ -1,20 +1,12 @@
 # 🌌 LifePilot AI — Personal Operating System & Digital Twin
 
-<p align="center">
-  <img src="docs/images/dashboard_mockup.png" alt="LifePilot AI CommandCenter Dashboard" width="100%" />
-</p>
+An elegant, dark-first, premium glassmorphic personal operating system and predictive life simulation engine.
 
-<p align="center">
-  <strong>An elegant, dark-first, premium glassmorphic personal operating system and predictive life simulation engine.</strong>
-</p>
-
-<p align="center">
-  <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" /></a>
-  <a href="https://typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
-  <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" /></a>
-  <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
-  <a href="https://zustand-demo.pmnd.rs/"><img src="https://img.shields.io/badge/Zustand-443322?style=for-the-badge&logo=react&logoColor=white" alt="Zustand" /></a>
-</p>
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Zustand](https://img.shields.io/badge/Zustand-443322?style=for-the-badge&logo=react&logoColor=white)](https://zustand-demo.pmnd.rs/)
 
 ---
 
@@ -26,23 +18,47 @@ Built with a high-end glassmorphic aesthetic inspired by Apple, Linear, Notion, 
 
 ---
 
-## 📸 Visual Showcase
+## 📐 System Architecture & Data Flow
 
-### 1. Command Center Dashboard
-The nerve center of your daily operations. Tracks XP progression, leveling badges, current active missions, and renders your core Life Scores on an interactive radar chart.
-<p align="center">
-  <img src="docs/images/dashboard_mockup.png" alt="Command Center Dashboard Mockup" width="90%" style="border-radius: 8px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);" />
-</p>
+Below is the technical representation of how the React Frontend, FastAPI Backend, database, and LLMs interact to form the Life Twin engine.
 
-### 2. Life Digital Twin Simulation
-Preview habit changes, calculate burnout risk, and simulate financial runways. Our predictive engine projects the future impact of your choices before you make them.
-<p align="center">
-  <img src="docs/images/digital_twin_mockup.png" alt="Life Digital Twin Simulation Mockup" width="90%" style="border-radius: 8px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);" />
-</p>
+### 1. Overall System Architecture
+```mermaid
+graph TD
+    User([User Browser]) <-->|HTTPS / WebSockets| FE[React Frontend SPA]
+    FE <-->|API Requests / JWT Auth| BE[FastAPI Backend Server]
+    BE <-->|SQLAlchemy ORM| DB[(PostgreSQL Database)]
+    BE <-->|HTTP Requests| AI[Google Gemini / OpenAI APIs]
+    
+    subgraph Frontend [Vite React Client]
+        FE -->|State Management| ZS[Zustand Store]
+        FE -->|Visual Rendering| RC[Recharts & React Flow]
+    end
+    
+    subgraph Backend [FastAPI Application]
+        BE -->|Auth Router| AR[User Session & Password Hashing]
+        BE -->|Twin Router| TR[Predictive Simulation Engine]
+        BE -->|Games Router| GR[Cognitive Game Evaluator]
+        BE -->|Modules Router| MR[18 Lifestyle Modules Router]
+    end
+```
+
+### 2. Digital Twin Simulation Engine Flow
+```mermaid
+graph TD
+    A[Adjust Habit Sliders on UI] -->|Sends Habit Deltas| B[Vite Client Store]
+    B -->|POST /twin/simulate| C[FastAPI Twin Router]
+    C -->|Constructs Prompt Context| D[LLM Diagnostics Client]
+    D -->|Calls LLM API| E[AI Generation Model]
+    E -->|Returns Recommendations| D
+    D -->|Runs Mathematical Projections| F[Generate Timeline Data]
+    F -->|Returns Simulation JSON| B
+    B -->|Updates Local State| G[Re-render Radar Charts & Insights]
+```
 
 ---
 
-## 🎮 The Core Pillars
+## 🎮 Core Technical Pillars
 
 ### 🧠 Playable Brain Training
 Keep your mind sharp with 4 interactive mini-games directly embedded within the interface:
@@ -73,7 +89,7 @@ The system is organized into **18 fully-featured modules** designed to replace f
 | :--- | :--- | :--- |
 | **Core Control** | **Command Center** | Centralized dashboard tracking active stats, Level, and Radar Chart scores. |
 | | **AI Life Analytics** | Correlates health metrics vs productivity vectors (e.g., Sleep vs. Task output). |
-| | **AI Life Score** | Radar chart rendering real-time metrics across 6 core lifestyle disciplines. |
+| | **AI Life Score** | Radar chart rendering real-time lifestyle metrics across 6 core disciplines. |
 | | **Missions & Quests** | Time-sensitive challenge cards that drive routine habit building. |
 | | **Gamification Hub** | Level up progression, XP milestones, unlockable customization features. |
 | | **Admin Panel** | Tracks system metrics, API token limits, database loads, and feature flags. |
@@ -89,22 +105,6 @@ The system is organized into **18 fully-featured modules** designed to replace f
 | | **Career Dashboard** | Job application pipeline Kanban, Resume reviewer, and AI mock interviews. |
 | | **Relationships CRM** | Birthday tracking, call log scheduling, and relationship quality index. |
 | | **Smart Automations** | Burnout warnings, auto-rescheduling tasks, and budget caps warnings. |
-
----
-
-## 🛠 Tech Stack
-
-### Frontend
-*   **Core**: React 18, TypeScript, Vite
-*   **Styling & FX**: Tailwind CSS, Framer Motion (smooth transition animations)
-*   **State & Routing**: Zustand (Zustand Global Store), React Router DOM
-*   **Data Vis**: Recharts (for finance, health, and twin prediction metrics), React Flow (for interactive note links & learning maps)
-
-### Backend
-*   **Server framework**: FastAPI (Python 3.11)
-*   **Database**: SQLAlchemy ORM with PostgreSQL (local SQLite for easy setup and testing)
-*   **Authentication**: JWT-based Secure OAuth2 (with hashed credentials using bcrypt)
-*   **AI Integration**: Google Gemini & OpenAI API clients with reliable routing fallbacks
 
 ---
 
@@ -183,7 +183,42 @@ LifePilot-AI/
 
 ---
 
-## 🔒 Security & Best Practices
-*   **Passwords**: Managed using secure hashing (`passlib` with bcrypt).
-*   **JWT Handshakes**: Session validation keys expire automatically.
-*   **Fallback AI Clients**: Built-in intelligence routes to alternate model configurations if default AI nodes time out.
+## ☁️ Free Cloud Deployment Guide
+
+Follow these steps to deploy **LifePilot AI** 100% for free across Neon (PostgreSQL database), Render (FastAPI Backend), and Vercel (React Frontend).
+
+### Step 1: Create a Free PostgreSQL Database
+1. Go to [Neon.tech](https://neon.tech/) and sign up for a free account.
+2. Create a new project (e.g., `lifepilot-db`).
+3. Copy the **Connection String** provided on your dashboard. It should look like this:
+   ```text
+   postgresql://alex:password@ep-glorious-snowflake-12345.us-east-2.neon.tech/neondb?sslmode=require
+   ```
+4. Keep this connection string ready for Step 2.
+
+### Step 2: Deploy the Backend on Render
+1. Go to [Render](https://render.com/) and sign up.
+2. Create a new **Web Service** and link your GitHub repository.
+3. Configure the following parameters:
+   * **Root Directory**: `backend`
+   * **Language**: `Python`
+   * **Build Command**: `pip install -r requirements.txt`
+   * **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+4. Expand **Advanced** and add these **Environment Variables**:
+   * `PYTHON_VERSION`: `3.11.9` *(Ensures stable execution and fast pre-compiled package builds)*
+   * `DATABASE_URL`: *[Your connection string from Neon.tech]*
+   * `SECRET_KEY`: *[Any secure text string for JWT token generation]*
+   * `GEMINI_API_KEY` (or `OPENAI_API_KEY`): *[Your API key to power AI features]*
+5. Click **Deploy Web Service** and copy your live service URL when ready (e.g. `https://lifepilot-backend.onrender.com`).
+
+### Step 3: Deploy the Frontend on Vercel
+1. Go to [Vercel](https://vercel.com/) and import your GitHub repository.
+2. Configure these parameters:
+   * **Root Directory**: `frontend`
+   * **Framework Preset**: `Vite`
+   * **Build Command**: `npm run build`
+   * **Output Directory**: `dist`
+3. Expand **Environment Variables** and add:
+   * **Key**: `VITE_API_URL`
+   * **Value**: *[Your Render backend URL from Step 2]* (e.g., `https://lifepilot-backend.onrender.com`)
+4. Click **Deploy**. Vercel will build your static assets and host your frontend on a free sub-domain!
