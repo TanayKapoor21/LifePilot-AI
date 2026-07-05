@@ -35,6 +35,7 @@ def setup_db():
     yield
     # Teardown database
     Base.metadata.drop_all(bind=engine)
+    engine.dispose()
     if os.path.exists("./test.db"):
         os.remove("./test.db")
 
